@@ -42,11 +42,10 @@ Is it a true definition? Mostly. Recursion is when a function calls itself. A re
 - A **`recursive`** case
 
 _What does this all mean?_ Let's consider a silly example:
-```sh
+```javascript
 function stepsToZero(n) {
-  if (!n === 0) { /* base case */
-    console.log('Reached zero');
-    return;
+  if (n === 0) { /* base case */
+    return 'Reached zero';
   } else { /* recursive case */
     console.log(n + ' is not zero');
     return stepsToZero(n-1);
@@ -66,23 +65,25 @@ This function doesn't do anything meaningful, but hopefully it demonstrates the 
 6. No, print message that 1 is not zero
 7. Invoke `stepsToZero(n-1)` where `n-1` evaluates to `0`
 8. Is 0 zero?
-9. Yes, print message that reached zero
-10. Return out of the current invocation
+9. Yes, return message that reached zero
+10. The above return pops the current invocation off the stack
 6. Resume the invocation from step 4 where it left off (in-between steps 6 and 7)
 6. Return out of the invocation from step 4
 12. Resume the initial invocation from step 1 where it left off (in-between steps 3 and 4)
 12. Return out of the initial invocation
 
+Note that the value returned from the base case (step 9) gets returned to the previous invocation (step 4) on the stack. Step 4's invocation takes that value and returns it to the invocation that preceded it (step 1). Once the initial invocation is reached, it returns the value to whatever invoked it. Through these steps, you can watch the call stack build up and once the base case is reached, the return value is passed back down as each invocation pops off the stack.
+
 Due to the way the execution stack operates, it's as if each function invocation pauses in time when a recursive call is made. The function that pauses before a recursive call will resume once the recursive call completes. If you've seen the movie [Inception], this model may sound reminiscent to when the characters enter a person's dreams and time slowed. The difference is time doesn't actually slow with recursive invocations; rather, it's a matter of order of operations. If a new invocation enters the execution stack, that invocation must complete before the previous can continue and complete.
 
 
 ### Why use recursion?
-Recursion can be elegant, but it can also be dangerous. It some cases, recursion feels like a more natural and readable solution; in others, it ends up being contrived. In most cases, recursion can be avoided entirely and sometimes should in order to minimize the possibility of exceeding the call stack and crashing your app. But keep in mind that code readability is important. If a recursive solution reads more naturally, then it may be the best solution for the given problem.
+Recursion can be elegant, but it can also be dangerous. In some cases, recursion feels like a more natural and readable solution; in others, it ends up being contrived. In most cases, recursion can be avoided entirely and sometimes should in order to minimize the possibility of exceeding the call stack and crashing your app. But keep in mind that code readability is important. If a recursive solution reads more naturally, then it may be the best solution for the given problem.
 
 Recursion isn't unique to any one programming language. As a software engineer, you _will_ encounter recursion and it's important to understand what's happening and how to work with it. It's also important to understand why someone might use it. Recursion is often used when the depth of a thing is unknown or every element of a thing needs to be touched. For example, you might use recursion if you want to find all DOM elements with a specific class name. You may not know how deep the DOM goes and need to touch every element so that none are missed. The same can be said for traversing any structure where all possible paths need to be considered and investigated.
 
 
 ### Divide and Conquer
-Recursion is often used in _divide and conquer_ algorithms where problems can be divided into similar subproblems and conquered individually. Consider traversing a tree structure. Each branch may have its own "children" branches. Every branch is essentually just another tree which means, as long as child trees are found, we can recurse on each child.
+Recursion is often used in _divide and conquer_ algorithms where problems can be divided into similar subproblems and conquered individually. Consider traversing a tree structure. Each branch may have its own "children" branches. Every branch is essentially just another tree which means, as long as child trees are found, we can recurse on each child.
 
 [inception]: <https://en.wikipedia.org/wiki/Inception>

@@ -276,7 +276,7 @@
         expect(sumBelow(12)).to.equal(66);
       });
 
-      it('should return the sum of an array of negative integers', function() {
+      it('should return the sum of negative integers above given negative integer', function() {
         expect(sumBelow(-1)).to.equal(0);
         expect(sumBelow(-2)).to.equal(-1);
         expect(sumBelow(-6)).to.equal(-15);
@@ -433,10 +433,11 @@
 
       // remove the 'x' to enable test
       xit('should accept negative integer for base', function() {
-        expect(exponent(-3,4)).to.equal(-81);
+        expect(exponent(-3,4)).to.equal(81);
         expect(exponent(-12,5)).to.equal(-248832);
-        expect(exponent(-7,2)).to.equal(-49);
-        expect(exponent(-7,4)).to.equal(-2401);
+        expect(exponent(-7,2)).to.equal(49);
+        expect(exponent(-7,4)).to.equal(2401);
+        expect(exponent(-3,5)).to.equal(-243);
       });
 
     });
@@ -693,17 +694,17 @@
         expect(multiply(17, 5)).to.equal(17 * 5);
         expect(multiply(0, 32)).to.equal(0 * 32);
         expect(multiply(0, 0)).to.equal(0 * 0);
-        // expect(multiply(78, 453)).to.equal(78 * 453);
+        expect(multiply(78, 453)).to.equal(78 * 453);
       });
 
       it('should return the product of two negative integers', function() {
         expect(multiply(-2, -2)).to.equal(-2 * -2);
         expect(multiply(-8, -3)).to.equal(-8 * -3);
         expect(multiply(-5, -27)).to.equal(-5 * -27);
-        // expect(multiply(-79, -82)).to.equal(-79 * -82);
-        // expect(multiply(-275, -502)).to.equal(-275 * -502);
-        // expect(multiply(-12, -10)).to.equal(-12 * -10);
-        // expect(multiply(-22, -3)).to.equal(-22 * -3);
+        expect(multiply(-79, -82)).to.equal(-79 * -82);
+        expect(multiply(-275, -502)).to.equal(-275 * -502);
+        expect(multiply(-12, -10)).to.equal(-12 * -10);
+        expect(multiply(-22, -3)).to.equal(-22 * -3);
       });
 
       it('should return the product of mixed positive and negative integers', function() {
@@ -711,18 +712,18 @@
         expect(multiply(79, -82)).to.equal(79 * -82);
         expect(multiply(2, -2)).to.equal(2 * -2);
         expect(multiply(5, -27)).to.equal(5 * -27);
-        // expect(multiply(-275, 502)).to.equal(-275 * 502);
-        // expect(multiply(275, -502)).to.equal(275 * -502);
-        // expect(multiply(-8, 3)).to.equal(-8 * 3);
-        // expect(multiply(12, -10)).to.equal(12 * -10);
-        // expect(multiply(-22, 3)).to.equal(-22 * 3);
+        expect(multiply(-275, 502)).to.equal(-275 * 502);
+        expect(multiply(275, -502)).to.equal(275 * -502);
+        expect(multiply(-8, 3)).to.equal(-8 * 3);
+        expect(multiply(12, -10)).to.equal(12 * -10);
+        expect(multiply(-22, 3)).to.equal(-22 * 3);
       });
 
       it('should accept parameters in any order', function() {
         expect(multiply(2, 1)).to.equal(1 * 2);
         expect(multiply(5, 17)).to.equal(5 * 17);
         expect(multiply(32, 0)).to.equal(0 * 32);
-        // expect(multiply(453, 78)).to.equal(78 * 453);
+        expect(multiply(453, 78)).to.equal(78 * 453);
       });
 
       it('should use recursion by calling self', function() {
@@ -1867,7 +1868,7 @@
         expect(alternateSign(input2)).to.not.equal(input2);
       });
 
-      it('should remove excess zeroes', function() {
+      it('should alternate signs', function() {
         expect(alternateSign(input1)).to.eql([2,-7,8,-3,1,-4]);
         expect(alternateSign(input2)).to.eql([2,-7,8,-3,1,-4]);
       });
